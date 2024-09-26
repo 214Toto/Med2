@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Study Hub</title>
+
+    <!-- Basic Styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 0.5em 1em;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .navbar .logo h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-right: 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #575757;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            /* margin-right: 2rem; */
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #694a4a;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            margin-right: 2rem;
+            width: 100px;
+        }
+
+        .dropdown-content a {
+            color: white;
+            margin: 2px;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #7c5151;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 50px;
+            text-align: center;
+            background-color: #555;
+            color: white;
+        }
+
+        /* Section Styling */
+        .section {
+            margin: 30px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            text-align: center;
+        }
+
+        /* Slider for Tips */
+        .slider {
+            position: relative;
+            height: 200px;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 200px;
+            display: none;
+        }
+
+        .slider img.active {
+            display: block;
+        }
+
+        /* WhatsApp Section */
+        .whatsapp-section {
+            text-align: center;
+            margin: 30px;
+            padding: 20px;
+            background-color: #25D366;
+            color: white;
+        }
+
+        .whatsapp-section a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .whatsapp-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar ul li {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .navbar ul li a {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="toto.jpg" alt="Logo">
+            <h1>Med 2 Hub</h1>
+        </div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a href="#">More...</a>
+                <div class="dropdown-content">
+                    <a href="notes.html">Notes</a>
+                    <a href="pastpapers.html">Past Papers</a>
+                    <a href="mcq.html">Quiz</a>
+                    <a href="flashcards.html">Flashcard</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to Med 2 Hub</h1>
+        <p>
+            Your one-stop solution for that Long awaited Academic comeback
+        </p>
+    </div>
+
+    <!-- Toto's Tips Section -->
+    <div class="section">
+        <h2>Toto's Tips</h2>
+        <div class="slider" id="totosTipsSlider">
+            <img src="1.jpg" alt="Tip 1" class="active">
+            <img src="2.jpg" alt="Tip 2">
+            <img src="3.jpg" alt="Tip 3">
+            <img src="4.jpg" alt="Tip 4">
+            <img src="toto.jpg" alt="Tip 5">
+        </div>
+    </div>
+
+    <!-- Study Tips Section -->
+    <div class="section">
+        <h2>Study Tips</h2>
+        <div class="slider" id="studyTipsSlider">
+            <img src="https://via.placeholder.com/800x200/ffa500/fff?text=Study+Tip+1" alt="Study Tip 1" class="active">
+            <img src="https://via.placeholder.com/800x200/6a5acd/fff?text=Study+Tip+2" alt="Study Tip 2">
+            <img src="https://via.placeholder.com/800x200/d2691e/fff?text=Study+Tip+3" alt="Study Tip 3">
+        </div>
+    </div>
+
+    <!-- WhatsApp Contact Section -->
+    <div class="whatsapp-section">
+        <h2>Connect with us on WhatsApp</h2>
+        <a href="https://wa.me/1234567890" target="_blank">WhatsApp Contact</a><br>
+        <a href="https://chat.whatsapp.com/YourGroupLink" target="_blank">Join WhatsApp Group</a>
+    </div>
+
+    <!-- JavaScript for Image Slider -->
+    <script>
+        // Function to handle image slider for both sections
+        function createSlider(sliderId, intervalTime) {
+            const slider = document.getElementById(sliderId);
+            const images = slider.getElementsByTagName('img');
+            let currentIndex = 0;
+
+            function showNextImage() {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            }
+
+            setInterval(showNextImage, intervalTime);
+        }
+
+        // Initialize sliders
+        createSlider('totosTipsSlider', 3000);  // Change every 3 seconds for Toto's Tips
+        createSlider('studyTipsSlider', 3500);  // Change every 3.5 seconds for Study Tips
+    </script>
+</body>
+
+</html>

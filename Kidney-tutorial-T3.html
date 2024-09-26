@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 270px;
+            text-align: left;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .options button:hover {
+            background-color: #0056b3;
+        }
+
+        .options button.correct {
+            background-color: #28a745 !important;
+        }
+
+        .options button.wrong {
+            background-color: #dc3545 !important;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #next-button, #result-button {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #next-button:hover, #result-button:hover {
+            background-color: #0056b3;
+        }
+
+        .chapwa {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .result-box {
+            color: #c40894;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(.9);
+            width: 300px;
+            height: 400px;
+            background: transparent;
+            border: 2px solid #c40894;
+            border-radius: 6px;
+            padding: 2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 1;
+            pointer-events: auto;
+            transition: .3s ease;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .percentage-container {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0px 40px;
+        }
+
+        .circular-progress {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            background: conic-gradient(#c40094 3.6deg, rgba(255, 255, 255, .4) 0deg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circular-progress::before {
+            content: '';
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            background: seagreen;
+            border-radius: 50%;
+            background: rgb(61, 65, 61);
+        }
+
+        .progress-value {
+            position: relative;
+            font-size: 45px;
+            font-weight: 600;
+        }
+
+        .score-text {
+            font-size: 26px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .result-box .buttons {
+            display: flex;
+        }
+
+        .buttons button{
+            width: 130px;
+            height: 47px;
+            outline: none;
+            background: #c40094;
+            border: 2px solid #c40094;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #fff;
+            font-weight: 600;
+            margin: 0 20px 20px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .buttons button:nth-child(1):hover {
+            background: #950170;
+            color: #fff;
+        }
+
+        .buttons button:nth-child(2) {
+            background: transparent;
+            color: #c40094;
+        }
+
+        .buttons button:nth-child(2):hover {
+            background: #c40094;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- <h1>MCQ Quiz</h1> -->
+        <div id="question-container">
+            <h2 id="question">Question will appear here</h2>
+            <div class="options">
+                <button class="option" onclick="checkAnswer(this)">Option 1</button>
+                <button class="option" onclick="checkAnswer(this)">Option 2</button>
+                <button class="option" onclick="checkAnswer(this)">Option 3</button>
+                <button class="option" onclick="checkAnswer(this)">Option 4</button>
+                <button class="option" onclick="checkAnswer(this)">Option 5</button>
+            </div>
+            <p id="feedback"></p>
+            <button id="next-button" onclick="nextQuestion()">Next Question</button>
+            <button id="result-button" onclick="showResults()">See Results</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: " 'Renal autoregulation' refers to the inference that",
+                options: ["the kidney does not require blood flow to sustain its active transport",
+                "the kidney contains baroreceptors (pressure receptors) that contribute to the regulation of cardiac output", 
+                "renal blood flow is relatively constant over a wide range of systemic arterial pressures", 
+                "renal blood flow is not affected by activation of the sympathetic nerves that innervate the kidney", 
+                "a combination of both C and D above"],
+                correctAnswer: "renal blood flow is relatively constant over a wide range of systemic arterial pressures",
+                explanation: "Renal autoregulation means the kidney maintains a relatively constant blood flow despite changes in systemic arterial pressure. This ensures stable kidney function, particularly in regulating the filtration of blood.",
+            },
+            {
+                question: "The following are regulated by the nerves that innervate the kidney",
+                options: ["Na-K-ATPase active transport pump rate", 
+                "renal autoregulation of blood flow", 
+                "urine volume and tonicity (osmolality)", 
+                "osmolality near loop of Henle", 
+                "None"],
+                correctAnswer: "None",
+                explanation: "While nerves play a role in many body systems, they do not regulate key functions like the Na-K-ATPase pump, autoregulation, or urine tonicity directly in the kidney",
+            },
+            {
+                question: "The following would be expected to cause renal inulin (or creatinine) clearance to increase?",
+                options: ["dilation of the afferent arteriole", 
+                "dilation of the efferent arteriole", 
+                " constriction of the afferent arteriole", 
+                "constriction of the efferent arteriole", 
+                " both A and D above"],
+                correctAnswer: " both A and D above",
+                explanation: "when afferent arterioles dilate there is an increase in the renal blood flow and when efferent arterioles constrict it raises filtration pressure",
+            },
+            {
+                question: "Kidney inflammation may result in the appearance of albumin (a plasma protein) in the urine because",
+                options: ["more albumin enters the proximal tubule in the glomerular filtrate", 
+                "reabsorption of albumin from the proximal tubule is inhibited", 
+                "secretion of albumin into the distal tubule and collecting ducts is increased", 
+                "increased peritubular blood flow makes more albumin available for diffusion into the tubule", 
+                "reduced active transport of sodium ion reduces cotransport of other substances, including albumin"],
+                correctAnswer: "more albumin enters the proximal tubule in the glomerular filtrate",
+                explanation: "Albumin appears in urine when more of it passes through the glomerulus into the proximal tubule due to damage or inflammation, impairing the filtration barrier.",
+            },
+            {
+                question: "As blood passes along the glomerular capillaries from the afferent to efferent arteriole, the net filtration pressure (DP - Dp)",
+                options: ["increases", "decreases", 
+                "first decreases, reaches a minimum about half way along the capillary, then increases", 
+                "first increases, reaches a maximum about half way along the capillary, then decreases", 
+                "remains constant"],
+                correctAnswer: "decreases",
+                explanation: "As blood flows from the afferent to efferent arterioles, the net filtration pressure decreases due to the balance between hydrostatic and osmotic forces.",
+            },
+            {
+                question: "Sodium is actively reabsorbed from the renal tubule in which of the following nephron segments?",
+                options: ["proximal tubule", "distal tubule", "thick ascending limb of the loop of Henle", "all of the above", "None of the above"],
+                correctAnswer: "all of the above",
+                explanation: "",
+            },
+            {
+                question: "The rate of water reabsorption from the proximal tubule is determined primarily by the",
+                options: ["rate of dissolved particle (solute) reabsorption from the proximal tubule", 
+                "concentration of ADH (antidiuretic hormone) in the blood", 
+                "osmotic pressure developed by plasma proteins in the proximal tubule", 
+                "active transport of water molecules by the proximal tubule cells", 
+                "passive filtration due to the high hydrostatic pressure in the proximal tubule"],
+                correctAnswer: "rate of dissolved particle (solute) reabsorption from the proximal tubule",
+                explanation: "Water reabsorption in the proximal tubule is primarily driven by the rate at which solutes (such as sodium) are reabsorbed. Water follows solutes osmotically.",
+            },
+            {
+                question: "Urea has a higher concentration in the fluid that leaves the proximal tubule (and enters the loop of Henle) than in blood plasma because",
+                options: ["urea is synthesized by proximal tubule cells", 
+                "urea is secreted into the proximal tubule", 
+                "urea is reabsorbed from the proximal tubule but at a lesser rate that water is reabsorbed", 
+                "urea diffuses back into the proximal tubule because of the high urea concentration in the renal medulla", 
+                "urea is actively transported into Bowman's capsule from the glomerular capillaries"],
+                correctAnswer: "urea is reabsorbed from the proximal tubule but at a lesser rate that water is reabsorbed",
+                explanation: "Urea concentration increases in the fluid leaving the proximal tubule because it is reabsorbed more slowly than water, causing a relative concentration increase.",
+            },
+            {
+                question: "In the proximal tubule, penicillin is",
+                options: ["actively secreted into the tubule", 
+                "actively reabsorbed from the tubule", 
+                "passively reabsorbed from the tubule", 
+                "metabolized by the tubule cells", 
+                "neither secreted nor reabsorbed nor metabolized"],
+                correctAnswer: "actively secreted into the tubule",
+                explanation: "Penicillin is actively secreted into the proximal tubule, which is why it is rapidly excreted in urine.",
+            },
+            {
+                question: "At which sites would the concentration of creatinine be expected to be highest? (Note: assume the person is normally hydrated.)",
+                options: ["glomerular filtrate", "end of the proximal tubule", 
+                "end of the loop of Henle", 
+                "urine", 
+                "the concentration would be the same in all of the above, since creatinine is neither secreted or reabsorbed"],
+                correctAnswer: "urine",
+                explanation: "Creatinine concentration is highest in urine because it is filtered but not reabsorbed or secreted, becoming more concentrated as water is reabsorbed along the nephron.",
+            },
+            {
+                question: "Suppose a person loses the function of half his nephrons because of renal degenerative disease. Assuming the person survives and reaches a new steady state and that body urea production remains normal, which of the following would be expected to decrease below normal?",
+                options: ["plasma urea concentration", 
+                "renal urea excretion", 
+                "renal urea clearance", 
+                "urine urea concentration", "all of the above"],
+                correctAnswer: "renal urea clearance",
+                explanation: "With the loss of nephrons, renal urea clearance decreases because fewer nephrons are available to filter and excrete urea, even if plasma concentration increases.",
+            },
+            {
+                question: "Stimulation of the osmoreceptors in the hypothalamus would be expected to cause all of the following to increase except",
+                options: ["ADH release from the pituitary", 
+                "water reabsorption from the renal collecting duct", 
+                "rate of urine formation", 
+                "osmolality of urine", 
+                "none of the above; that is, none are exceptions since all would be expected to increase"],
+                correctAnswer: "rate of urine formation",
+                explanation: "Stimulation of osmoreceptors increases ADH release, leading to more water reabsorption and decreased urine formation, so the rate of urine formation does not increase.",
+            },
+            {
+                question: "As fluid passes along a juxtamedullary nephron, where is its osmolality (total concentration of dissolved particles) lowest? (Note: assume a normal concentration of circulating ADH.)",
+                options: ["Bowman's capsule (glomerular filtrate)", 
+                "fluid leaving the proximal tubule and entering the loop of Henle", 
+                "fluid leaving the descending thin limb and entering the ascending thin limb of the loop of Henle", 
+                "fluid leaving the thick ascending segment of the loop of Henle and entering the distal tubule", 
+                "fluid leaving the collecting ducts (urine)"],
+                correctAnswer: "fluid leaving the thick ascending segment of the loop of Henle and entering the distal tubule",
+                explanation: "The osmolality of fluid is lowest after leaving the thick ascending limb of the loop of Henle, where sodium is reabsorbed without water, making the fluid hypotonic.",
+            },
+            {
+                question: "Drinking vodka (a beverage with a high ethanol content, for those of you unfamiliar with this substance) would be expected to cause excretion of a",
+                options: ["large volume of concentrated urine", 
+                "small volume of concentrated urine", 
+                "large volume of dilute urine", 
+                "small volume of dilute urine", 
+                "normal volume of urine of normal osmolality"],
+                correctAnswer: "large volume of dilute urine",
+                explanation: "Vodka inhibits ADH secretion, which reduces water reabsorption and leads to the production of a large volume of dilute urine.",
+            },
+            {
+                question: "Drinking which of the following would lead to the highest rate of ADH secretion and release?",
+                options: ["two liters of distilled water ", 
+                "two liters of sea water (mainly hyperosmotic saline) ", 
+                "two liters of iso-osmotic (isotonic) saline ", 
+                "two liters of human blood plasma ", 
+                "none of the above, since drinking two liters of any liquid leads to inhibition of ADH release"],
+                correctAnswer: "two liters of sea water (mainly hyperosmotic saline) ",
+                explanation: " Drinking seawater increases plasma osmolality, which stimulates ADH secretion to retain water and reduce dehydration. ",
+
+            },
+            {
+                question: "In a patient with severe renal artery stenosis (narrowing), all of the following would be expected to be increased above normal except",
+                options: ["plasma renin concentration", 
+                "plasma angiotensin II concentration", 
+                "blood pressure (hydrostatic pressure) in the glomerular capillaries",
+                "resistance to blood flow in the efferent arteriole", 
+                "systemic arterial blood pressure"],
+                correctAnswer: "blood pressure (hydrostatic pressure) in the glomerular capillaries",
+                explanation: "In renal artery stenosis, blood pressure in the glomerular capillaries may not increase due to impaired blood flow into the kidney, despite elevated systemic pressure",
+
+            },
+            {
+                question: "Administration of an Angiotensin Converting Enzyme inhibitor (ACE inhibitor) to the previous patient (the patient with severe artery stenosis) might lead to acute renal failure by",
+                options: ["inhibiting renal tubule potassium reabsorption", 
+                "increasing renal resistance to blood flow", 
+                "causing plasma proteins to be excreted in the urine", 
+                "causing systemic arterial hypertension", 
+                "reducing glomerular filtration rate"],
+                correctAnswer: "reducing glomerular filtration rate",
+                explanation: "ACE inhibitors lower glomerular filtration rate (GFR) by reducing angiotensin II levels, which can cause acute renal failure in patients with compromised kidney function.",
+
+            },
+            {
+                question: "Which of the following is the stimulus for increased secretion of atrial natriuretic peptide (ANP)?",
+                options: ["increase blood plasma osmolality above normal", 
+                "decrease blood plasma osmolality below normal", 
+                "increase systemic arterial pressure", 
+                "increase venous blood volume and atrial pressure", 
+                "increase cardiac contractility (force of contraction)"],
+                correctAnswer: "increase venous blood volume and atrial pressure",
+                explanation: "Increased venous blood volume and atrial pressure trigger ANP release, promoting natriuresis (sodium excretion) and reducing blood volume and pressure.",
+            },
+            {
+                question: "An increase secretion of renin would be expected to have what effect on sodium excretion and potassium excretion in urine?",
+                options: ["increase in Na+ excretion and increase K+ excretion", 
+                "increase in Na+ excretion and decrease K+ excretion", 
+                "decrease in Na+ excretion and increase K+ excretion", 
+                "decrease in Na+ excretion and decrease K+ excretion", 
+                "decrease in Na+ excretion but no effect on K+ excretion"],
+                correctAnswer: "decrease in Na+ excretion and increase K+ excretion",
+                explanation: "Increased renin secretion reduces sodium excretion (by increasing aldosterone) and enhances potassium excretion.",
+
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = currentQuestion.question;
+            const buttons = document.querySelectorAll(".option");
+            buttons.forEach((btn, index) => {
+                btn.textContent = currentQuestion.options[index];
+                btn.disabled = false;
+                btn.classList.remove('correct', 'wrong');
+            });
+            document.getElementById('feedback').textContent = "";
+            document.getElementById('next-button').style.display = "none";
+        }
+
+        function checkAnswer(button) {
+            const currentQuestion = questions[currentQuestionIndex];
+            const buttons = document.querySelectorAll(".option");
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (button.textContent === currentQuestion.correctAnswer) {
+                button.classList.add('correct');
+                document.getElementById('feedback').textContent = "Correct!";
+                document.getElementById('feedback').style.color = "#28a745";
+                score++;
+            } else {
+                button.classList.add('wrong');
+                document.getElementById('feedback').textContent = currentQuestion.explanation;
+                document.getElementById('feedback').style.color = "#dc3545";
+
+                buttons.forEach(btn => {
+                    if (btn.textContent === currentQuestion.correctAnswer) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            if (currentQuestionIndex < questions.length - 1) {
+                document.getElementById('next-button').style.display = "block";
+            } else {
+                document.getElementById('result-button').style.display = "block";
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            const totalQuestions = questions.length;
+            const percentage = Math.round((score / totalQuestions) * 100);
+
+    // Initialize the result box content
+    document.getElementById('question-container').innerHTML = `
+    <div class="result-box">
+        <h2>Quiz Result</h2>
+        <div class="percentage-container">
+            <div class="circular-progress">
+                <span class="progress-value">0%</span>
+            </div>
+            <span class="score-text">Your Score 0 out of ${totalQuestions}</span>
+        </div>
+        <div class="buttons">
+            <button class="tryagain-btn" onclick="restartQuiz()">Try Again</button>
+            <button class="done-btn" onclick="finishQuiz()">Done</button>
+        </div>
+    </div>
+    `;
+
+    let progressValue = 0;
+    let speed = 20;  // Speed of the animation (the lower the value, the faster the animation)
+    
+    // Animate the percentage and color
+    const progressInterval = setInterval(() => {
+        progressValue++;
+        document.querySelector('.progress-value').textContent = `${progressValue}%`;
+        document.querySelector('.circular-progress').style.background = `conic-gradient(
+            #c40094 ${progressValue * 3.6}deg,
+            rgba(255, 255, 255, .4) ${progressValue * 3.6}deg
+        )`;
+        document.querySelector('.score-text').textContent = `Your Score ${Math.round((progressValue / 100) * totalQuestions)} out of ${totalQuestions}`;
+
+        if (progressValue === percentage) {
+            clearInterval(progressInterval);
+        }
+    }, speed);
+}
+
+
+        function restartQuiz() {
+            window.location.reload();
+        }
+
+        function finishQuiz() {
+            window.location.href = 'physiology-quiz-T3.html';
+            // Add any additional actions you want to take when the quiz is done
+        }
+
+        // Load the first question when the page is loaded
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcard Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Times New Roman', Times, serif, sans-serif;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px 20px;
+      background: #060625;
+      display: flex;
+      /* margin-bottom: 10rem; */
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+
+    main {
+      margin-top: 16rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;  /* Arranges the cards vertically */
+      gap: 3rem;  /* Adds 3rem of space between the cards */
+    }
+
+    .card {
+      width: 350px;
+      height: 200px;
+      perspective: 1000px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .card div {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      border-radius: 10px;
+      padding: 20px;
+      /* text-align: center; */
+      transition: transform 0.6s;
+    }
+
+    .front {
+      background-color: #ffcc00;
+    }
+
+    .back {
+      background-color: #009688;
+      color: #000000;
+      transform: rotateY(180deg);
+      text-align: left;
+    }
+
+    .card.flipped .front {
+      transform: rotateY(180deg);
+    }
+
+    .card.flipped .back {
+      transform: rotateY(0deg);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">CBU SOM</a>
+    <h2>Totoz Brainy Basecamp!</h2>
+  </header>
+
+ <main>
+  <div class="card-container">
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> The Heart is ......... in origin </div>
+      <div class="back"> Mesodermal </div>
+      <!-- <div class="back"> &rarr; Superior to the diaphragm <br>&rarr; Posterior to the sternum <br>&rarr; In the middle mediastinum <br>&rarr; Between 2nd and 6th ribs <br>&rarr; Between T5-T8</div> -->
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> Which part makes the roof and whch one forms the floor of the pericardial cavity  </div>
+      <div class="back"> &#10003; Roof &rarr;somatopleuric layer <br> &#10003; floor &rarr;splanchnopleuric layer </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> On what day do the Cardiac progenitor cells appear at the caudal epiblast, lateral to primitive streak</div>
+      <div class="back"> &#10003; 16th–18th days of development</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">What induces formation of cardiogenic area where horseshoeshaped blood islands are formed by angiogenic clusters</div>
+      <div class="back">Pharyngeal endoderm underlying primary heart field</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The endothelial lined heart tubes are surrounded by</div>
+      <div class="back">myoblasts</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">Splanchnopleuric mesoderm lining the dorsal side of the pericardial cavity proliferates to form a thick layer called ?</div>
+      <div class="back">myoepicardial mantle or epimyocardial mantle</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The Myoepicardial mantle gives rise to the .......... and .........</div>
+      <div class="back">cardiac muscle (myocardium) and visceral layer of pericardium (epicardium) </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">parietal layer of pericardium is derived from</div>
+      <div class="back">somatopleuric mesoderm</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The Endothelial heart tube forms the ?</div>
+      <div class="back">endocardial of the heart</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">A single tube thus formed shows a series of dilatations namely ?</div>
+      <div class="back"> <br> &#10003; Bulbus cordis<br> &#10003; Ventricle (primitive ventricle)<br> &#10003; Atrium (primitive atrium or atrial chamber)<br> &#10003; Sinus venosus</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The Bulbus cordis & ventricle are separated by</div>
+      <div class="back">bulboventricular sulcus</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">sinus venosus & atrium are connected by</div>
+      <div class="back">sinoatrial orifice</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">atrium & ventricle are in communication through the ....</div>
+      <div class="back">atrioventricular canal (AV canal)</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The bulbus cordis is divided into three regions, namely.....</div>
+      <div class="back"> &#10003; Truncus Arteriosus <br> &#10003; conus<br> &#10003; proximal</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> What does each structure above form </div>
+      <div class="back"> &#10003; Truncus Arteriosus &rarr; ascending aorta and pulmonary trunk <br> &#10003; conus &rarr; outflow tracts of the Rght and left ventricles <br> &#10003; Proximal&rarr; right ventricle</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> The heart tube is suspended from the dorsal wall of the pericardial cavity by the</div>
+      <div class="back">dorsal mesocardium</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">caudal part of the heart tube (atrium, sinus venosus) is embedded within the substance of the ?</div>
+      <div class="back"> septum transversum</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">What forms the “U”-shaped bulboventricular loop </div>
+      <div class="back">Rapid growing of the Bulbus cordis & ventricle</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">what forms the “S”-shaped</div>
+      <div class="back">when the atrium & sinus venosus are freed from the septum transversum and they come to lie behind & above the ventricle</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">Which chanmbers of the heart tube eventually come to form one tube </div>
+      <div class="back"> &#10003;conus<br> &#10003; proximal bulbus cordis<br> &#10003;ventricle</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">Cardiac septations to form definitive heart occur between which weeks</div>
+      <div class="back"> 5th & 8th weeks</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The Caudal (venous end) part of primitive heart tube presents a body with two parts called ?</div>
+      <div class="back">right and left horns</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">Each Left and/or right and left horns has...</div>
+      <div class="back">❖One vitelline vein (from the yolk sac),
+        ❖one umbilical vein (from the placenta) 
+        ❖one common cardinal vein(from the body wall)</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The sinus venosus & primitive atrial chamber connected by an opening, sinoatrial orifice, partially separated by grooves that appear on the lateral wall, at the junction of these 2 chambers. Wich grooves eventually becomes deep adnd which one remains shallow</div>
+      <div class="back">right groove remains shallow but the left deepen</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">Cranially the 2 valves o the sinoatrial orifice fuse to form ........ Caudally forms........</div>
+      <div class="back">septum spurium & sinus septum</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The right common cardinal vein becomes part of the ?</div>
+      <div class="back">superior vena cava</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> The right vitelline vein forms the terminal part of the ?</div>
+      <div class="back">Terminal part of the inferior vena cava </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The right margin of the original sinoatrial orifice expands greatly divides into 3 parts by What ?</div>
+      <div class="back">2 muscular bands &rarr; superior & inferior limbic bands</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">3 parts of right venous valve are the</div>
+      <div class="back"> &#10003;crista terminalis<br> &#10003;valve of the inferior vena cava<br> &#10003;valve of the coronary sinus</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The communication between common atrial chamber & ventricle include the AV canal. 2 thickenings, the AV endocardial cushions, appear on the dorsal and ventral walls of AV canal by proliferation of subendocardial mesenchymal cells around right and left AV canals. These grow toward each other and fuse form what ?</div>
+      <div class="back">septum intermedium</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">Before septum primum fuses with the septum intermedium, blood flows through the gap between them. What is the name of this gap</div>
+      <div class="back">foramen primum/ ostium primum</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">Before foramen primum can be closed, another path for flow of blood is created by breaking down of the upper part of the septum primum this new gap is called ?</div>
+      <div class="back">foramen secundum</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">Septum secundum grows down from the roof of the atrial chamber, to the right of the septum primum. It comes to overlap the free upper edge of the septum primum. The 2 septa overlap and blood flows through the interval between them. The gap formed here is the.........</div>
+      <div class="back">foramen ovale</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">............. represents the lower free edge of the septum secundum</div>
+      <div class="back">annulus ovalis </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">The right atrium is derived from 3 sources, namely; </div>
+      <div class="back"> &#10003; Right half of the primitive atrium <br> &#10003; Absorption of right horn of sinus venosus into the right half of primitive atrium <br> &#10003;Absorption of right half of AV canal </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">What part forms rough trabeculated part (atrium proper) in front of crista terminalis including right auricle ?</div>
+      <div class="back">Right half of the primitive atrium </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front">What forms the smooth part (sinus venarum) behind crista terminalis ?</div>
+      <div class="back"> Absorption of right horn of sinus venosus into the right half of primitive atrium</div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> left horn of the sinus venosus & its tributaries reduces in size becomes part of the  </div>
+      <div class="back"> coronary sinus </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <<div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+
+    <div class="card" onclick="flipCard(this)">
+      <div class="front"> </div>
+      <div class="back"> </div>
+    </div>
+  </div>
+ </main>
+  
+
+  <script>
+    function flipCard(card) {
+      card.classList.toggle("flipped");
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Embryology Term 3 Quizes </title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+    }
+    .label {
+        width: 500px;
+        border: 2px solid black;
+    }
+    .label-inputs {
+        margin-top: 20px;
+    }
+    .label-input {
+        margin: 10px 0;
+    }
+    input[type="text"] {
+        padding: 5px;
+        width: 300px;
+        font-size: 1em;
+    }
+    button {
+        padding: 10px 20px;
+        margin-top: 20px;
+        font-size: 1em;
+        color: antiquewhite;
+        cursor: pointer;
+        background-color: rgb(7, 7, 54);
+        border-radius: 6px;
+    }
+    .result {
+        margin-top: 20px;
+        font-size: 1.2em;
+    }
+    .correct-answer {
+        color: green;
+        font-style: italic;
+    }
+    .incorrect-answer {
+        color: red;
+        font-style: italic;
+    }
+</style>
+</head>
+<body>
+  
+  <main>
+    <header class="header">
+      <a href="index.html" class="logo"> CBU SOM </a>
+
+  
+      <h2> Totoz Brainy Basecamp ! </h2>
+
+      <a href="embryology-quiz-T3.html" class="nav"> Back </a>
+
+
+    </header>
+
+    <div class="container">
+      <img src="Log.png">
+      
+            <h1>Label the Image Quiz</h1>
+            
+            <!-- Image with numbered labels -->
+            <img class="label" src="label-3.png" alt="Labelled Image" id="quiz-image">
+            <!-- <p>Enter the correct name for each label in the fields below with refference from the Superior Medistinum. :</p> -->
+            
+            <div class="label-inputs">
+                <!-- 10 input fields for the labels -->
+                <div class="label-input">
+                    <label for="label1">Label 1:</label>
+                    <input type="text" id="label1">
+                    <button onclick="checkIndividualAnswer(1)">Submit Answer</button>
+                    <p id="result1"></p>
+                </div>
+                <div class="label-input">
+                    <label for="label2">Label 2:</label>
+                    <input type="text" id="label2">
+                    <button onclick="checkIndividualAnswer(2)">Submit Answer</button>
+                    <p id="result2"></p>
+                </div>
+                <div class="label-input">
+                    <label for="label3">Label 3:</label>
+                    <input type="text" id="label3">
+                    <button onclick="checkIndividualAnswer(3)">Submit Answer</button>
+                    <p id="result3"></p>
+                </div>
+                <div class="label-input">
+                    <label for="label4">Label 4:</label>
+                    <input type="text" id="label4">
+                    <button onclick="checkIndividualAnswer(4)">Submit Answer</button>
+                    <p id="result4"></p>
+                </div>
+                <div class="label-input">
+                    <label for="label5">Label 5:</label>
+                    <input type="text" id="label5">
+                    <button onclick="checkIndividualAnswer(5)">Submit Answer</button>
+                    <p id="result5"></p>
+                </div>
+                <div class="label-input">
+                    <label for="label6">Label 6:</label>
+                    <input type="text" id="label6">
+                    <button onclick="checkIndividualAnswer(6)">Submit Answer</button>
+                    <p id="result6"></p>
+                </div>
+                <!-- <div class="label-input">
+                    <label for="label7">Label 7:</label>
+                    <input type="text" id="label7">
+                    <button onclick="checkIndividualAnswer(7)">Submit Answer</button>
+                    <p id="result7"></p>
+                </div>
+                <div class="label-input">
+                    <label for="label8">Label 8:</label>
+                    <input type="text" id="label8">
+                    <button onclick="checkIndividualAnswer(8)">Submit Answer</button>
+                    <p id="result8"></p>
+                </div> -->
+                <!-- <div class="label-input">
+                    <label for="label9">Label 9:</label>
+                    <input type="text" id="label9">
+                    <button onclick="checkIndividualAnswer(9)">Submit Answer</button>
+                    <p id="result9"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label10">Label 10:</label>
+                    <input type="text" id="label10">
+                    <button onclick="checkIndividualAnswer(10)">Submit Answer</button>
+                    <p id="result10"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label11">Label 11:</label>
+                    <input type="text" id="label11">
+                    <button onclick="checkIndividualAnswer(11)">Submit Answer</button>
+                    <p id="result11"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label12">Label 12:</label>
+                    <input type="text" id="label12">
+                    <button onclick="checkIndividualAnswer(12)">Submit Answer</button>
+                    <p id="result12"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label13">Label 13:</label>
+                    <input type="text" id="label13">
+                    <button onclick="checkIndividualAnswer(13)">Submit Answer</button>
+                    <p id="result13"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label14">Label 14:</label>
+                    <input type="text" id="label14">
+                    <button onclick="checkIndividualAnswer(14)">Submit Answer</button>
+                    <p id="result14"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label15">Label 15:</label>
+                    <input type="text" id="label15">
+                    <button onclick="checkIndividualAnswer(15)">Submit Answer</button>
+                    <p id="result15"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label16">Label 16:</label>
+                    <input type="text" id="label16">
+                    <button onclick="checkIndividualAnswer(16)">Submit Answer</button>
+                    <p id="result16"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label17">Label 17:</label>
+                    <input type="text" id="label17">
+                    <button onclick="checkIndividualAnswer(17)">Submit Answer</button>
+                    <p id="result17"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label18">Label 18:</label>
+                    <input type="text" id="label18">
+                    <button onclick="checkIndividualAnswer(18)">Submit Answer</button>
+                    <p id="result18"></p>
+                </div>
+
+                <div class="label-input">
+                    <label for="label19">Label 19:</label>
+                    <input type="text" id="label19">
+                    <button onclick="checkIndividualAnswer(19)">Submit Answer</button>
+                    <p id="result19"></p>
+                </div> -->
+            </div>
+
+            <button onclick="checkAllAnswers()">Submit All Answers</button>
+
+    <div class="result" id="final-result"></div>
+
+      
+    </div>
+
+    <div class="footer">
+      <h1> ToTo </h1>
+    </div>
+   
+  </main>
+
+  <script>
+    // Define the correct answers for the labels
+    const correctAnswers = [
+        "Parietal pleura", "Visceral pleura", "Pleura Cavity", "Mediastinum", "Left Lung",
+        "Right Lung"
+    ];
+
+    // Function to check individual answers
+    function checkIndividualAnswer(index) {
+        let userAnswer = document.getElementById('label' + index).value.trim().toLowerCase();
+        let correctAnswer = correctAnswers[index - 1].toLowerCase();
+        let resultText = '';
+
+        if (userAnswer === correctAnswer) {
+            resultText = `<span class="correct-answer">Correct!</span>`;
+        } else {
+            resultText = `<span class="incorrect-answer">Incorrect</span>. Correct answer: <strong>${correctAnswers[index - 1]}</strong>`;
+        }
+
+        // Display the result for the individual label
+        document.getElementById('result' + index).innerHTML = resultText;
+    }
+
+    // Function to check all answers
+    function checkAllAnswers() {
+        let score = 0;
+        let resultDiv = document.getElementById('final-result');
+        resultDiv.innerHTML = '';  // Clear the previous result
+
+        // Loop through each label input and compare with correct answers
+        for (let i = 1; i <= 8; i++) {
+            let userAnswer = document.getElementById('label' + i).value.trim().toLowerCase();
+            let correctAnswer = correctAnswers[i - 1].toLowerCase();
+            let resultText = '';
+
+            if (userAnswer === correctAnswer) {
+                score++;
+                resultText = `<span class="correct-answer">Correct!</span>`;
+            } else {
+                resultText = `<span class="incorrect-answer">Incorrect</span>. Correct answer: <strong>${correctAnswers[i - 1]}</strong>`;
+            }
+
+            // Show the result for each input field
+            document.getElementById('result' + i).innerHTML = resultText;
+        }
+
+        // Display the total score at the bottom
+        resultDiv.innerHTML = `You got ${score} out of 19 correct!`;
+    }
+</script>
+
+</body>
+</html>
